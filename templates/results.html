@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extraction Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .result-section {
+            margin-bottom: 2rem;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #27ae60;
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #95a5a6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #7f8c8d;
+        }
+        .count {
+            font-weight: bold;
+            color: #3498db;
+        }
+        .no-results {
+            color: #e74c3c;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Extraction Results</h1>
+        
+        <div class="result-section">
+            {% if files %}
+                {% for file in files %}
+                    {% set category = file.split('_')[0] %}
+                    {% set count = request.args.get(category ~ '_count', '0') %}
+                    <h3>{{ category.capitalize() }} Numbers: <span class="count">{{ count }}</span> found</h3>
+                    <a href="{{ url_for('download', filename=file) }}" class="download-btn">
+                        Download {{ category.capitalize() }} Numbers (CSV)
+                    </a>
+                    <br><br>
+                {% endfor %}
+            {% else %}
+                <p class="no-results">No matching numbers were found in the PDF.</p>
+            {% endif %}
+        </div>
+        
+        <a href="{{ url_for('home') }}" class="back-btn">← Process Another File</a>
+    </div>
+</body>
+</html>
