@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Trade Marks Journal Extractor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .upload-box {
+            border: 2px dashed #3498db;
+            border-radius: 5px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background-color: #f8fafc;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Indian Trade Marks Journal Extractor</h1>
+        
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <div class="instructions">
+            <p>Upload a PDF file from the Indian Trade Marks Journal to extract:</p>
+            <ul>
+                <li>Advertisement Numbers</li>
+                <li>Corrigenda Numbers</li>
+                <li>RC Numbers</li>
+                <li>Renewal Numbers</li>
+            </ul>
+        </div>
+        
+        <form method="post" enctype="multipart/form-data" class="upload-box">
+            <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required>
+            <br><br>
+            <button type="submit" class="btn">Process PDF</button>
+        </form>
+        
+        <footer>
+            <p>Note: The PDF will be processed on the server and not stored permanently.</p>
+        </footer>
+    </div>
+</body>
+</html>
