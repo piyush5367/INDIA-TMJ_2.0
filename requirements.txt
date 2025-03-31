@@ -1,0 +1,5 @@
+pywebio
+pdfplumber
+pandas
+openpyxl
+gunicorn
